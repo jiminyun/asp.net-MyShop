@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Runtime.Caching;
 using MyShop.Core.Models;
 
-namespace MyShop.DataAccess.SQL
+namespace MyShop.DataAccess.InMemory
 {
-    class ProductRepository
+    public class ProductRepository
     {
         ObjectCache cache = MemoryCache.Default;
         List<Product> products;
@@ -16,7 +16,7 @@ namespace MyShop.DataAccess.SQL
         public ProductRepository()
         {
             products = cache["products"] as List<Product>;
-            if(products == null)
+            if (products == null)
             {
                 products = new List<Product>();
             }
@@ -25,7 +25,6 @@ namespace MyShop.DataAccess.SQL
         public void Commit()
         {
             cache["products"] = products;
-
         }
 
         public void Insert(Product p)
@@ -37,7 +36,7 @@ namespace MyShop.DataAccess.SQL
         {
             Product productToUpdate = products.Find(p => p.Id == product.Id);
 
-            if(productToUpdate != null)
+            if (productToUpdate != null)
             {
                 productToUpdate = product;
             }
@@ -66,7 +65,7 @@ namespace MyShop.DataAccess.SQL
             return products.AsQueryable();
         }
 
-        public void Delete (string Id)
+        public void Delete(string Id)
         {
             Product productToDelete = products.Find(p => p.Id == Id);
 
@@ -81,4 +80,3 @@ namespace MyShop.DataAccess.SQL
         }
     }
 }
-
