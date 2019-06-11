@@ -11,6 +11,7 @@ namespace MyShop.WebUI.Controllers
     public class ProductCategoryManagerController : Controller
     {
         ProductCategoryRepository context;
+        
         public ProductCategoryManagerController()
         {
             context = new ProductCategoryRepository();
